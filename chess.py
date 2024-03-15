@@ -52,19 +52,31 @@ class GameState():
 
         self.board[current_row][current_col] = "--"
         self.board[desired_row][desired_col] = piece
-        self.recent_moves.append(piece[1] + desired_position)
+        self.recent_moves.append((current_pos, piece, desired_position))
     
-    def legal_moves(self)->None:
-        for row in range(DIMENSION):
-            for col in range(DIMENSION):
-                piece = self.board[row][col]
+    # def legal_move(self)->None:
+    #     '''
+    #     adjusts the legal moves dictionary to show the current legal moves for each piece
+    #     '''
+    #     for row in range(DIMENSION):
+    #         for col in range(DIMENSION):
+    #             piece = self.board[row][col]
+    #             for move in self.recent_moves:
+    #                 if piece == "wP":
+    #                     if col in move[0]: ## checking to see if the pawn made a previous move. Need to use the dictionary given a destination not a key tho
+    #                         if self.board[row+1][col] == "--":
+    #                             current_col = COL_DICT[]
+    #                             self.legal_moves["wP"].append()
+                    
+
+
         
         
         
 
 
 
-    def print_board(self)->str:
+    def print_board_state(self)->str:
         '''
         prints the current state of the board
         '''
@@ -74,14 +86,18 @@ class GameState():
         for row in self.board:
             print(f"{row_number}  " + ' '.join(row))
             row_number -= 1
+        print (game_state.recent_moves)
 
 
 
 if __name__ == "__main__":
     game_state = GameState()
     game_state.make_move("wP", 'D4', 'D2' )
-    game_state.print_board()
-    print (game_state.recent_moves)
+    game_state.print_board_state()
+    
+    game_state.make_move("bP", "D5", "D7")
+    game_state.print_board_state()
+    
 
 
 
